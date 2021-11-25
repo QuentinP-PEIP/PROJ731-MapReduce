@@ -1,8 +1,11 @@
+import java.io.IOException;
+import java.util.List;
+
 public class Main {
-    public static void main(String args[]) {
-        String nom_fichier = "Hamilton.txt";
-        Fichier fichier = new Fichier(nom_fichier);
-        String partie = fichier.texte_divise.get(0);
+    public static void main(String args[]) throws IOException {
+        String nom_fichier = "big.txt";
+        Fichier2 fichier = new Fichier2(nom_fichier);
+        List<String> partie = fichier.texte_divise.get(0);
 
         Map n = new Map(partie);
         Shuffle s = new Shuffle(n.mot);

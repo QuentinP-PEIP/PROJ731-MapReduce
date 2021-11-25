@@ -13,12 +13,17 @@ public class Fichier {
     ArrayList<String> texte_divise;
 
     public Fichier(String fichier) {
-        String adresse = "Textes\\" + fichier;
+        long debut = System.currentTimeMillis();
+        String adresse = "PROJ731-MapReduce\\Textes\\" + fichier;
 		this.number = this.count_line(adresse);
+        long tempsExe1 = System.currentTimeMillis()-debut;
+        System.out.println("Temps de lecture des lignes est de " + tempsExe1 + " ms");
 
         System.out.println("Le fichier contient " + this.number + " lignes");
         
         this.texte_divise = this.cut(adresse);
+        long tempsExe2 = System.currentTimeMillis()-debut;
+        System.out.println("Temps d'exécution du cut est de " + tempsExe2 + " ms");
     }
 
     public int count_line(String adresse){ //Fonction qui permet de compter le nombre de ligne dans le document donné par l'adresse
