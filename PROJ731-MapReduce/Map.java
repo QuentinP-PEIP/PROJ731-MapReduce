@@ -1,20 +1,18 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Map {
-    private String texte;
+    private List<String> texte;
     public ArrayList<Couple> mot = new ArrayList<Couple>();
 
-    public Map(String texte){
-        this.texte = texte.toLowerCase();
+    public Map(List<String> texte){
+        this.texte = texte;
         //splitbyword(this.texte);
     }
 
-    public void splitbyword(String texte){
-        String result = texte.replaceAll("\\p{Punct}&&[^']+", " ");
-        String result1 = result.replaceAll(",", "");
-        String result2 = result1.replaceAll("\\.", "");
-        String[] words = result2.split(" ");
-        for (String s : words){
+    public void splitbyword(){
+        for (int i = 0; i<this.texte.size(); i++){
+            String s = this.texte.get(i).toLowerCase();
             if(!s.equals("")){
                 Couple c = new Couple(s, 1);
                 this.mot.add(c);

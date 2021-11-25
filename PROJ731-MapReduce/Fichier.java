@@ -13,7 +13,7 @@ public class Fichier {
     ArrayList<String> texte_divise;
 
     public Fichier(String fichier) {
-        String adresse = "Textes\\" + fichier;
+        String adresse = "PROJ731-MapReduce\\Textes\\" + fichier;
 		this.number = this.count_line(adresse);
 
         System.out.println("Le fichier contient " + this.number + " lignes");

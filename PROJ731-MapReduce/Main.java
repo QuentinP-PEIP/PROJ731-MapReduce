@@ -1,19 +1,20 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.Map;
 import java.util.Map.Entry;
 
 
 public class Main {
-    public static void main(String args[]) throws InterruptedException {
+    public static void main(String args[]) throws InterruptedException, IOException {
 
         long debut = System.currentTimeMillis();  
-        String nom_fichier = "Hamilton.txt";
-        Fichier fichier = new Fichier(nom_fichier);
-        String partie1 = fichier.texte_divise.get(0);
-        String partie2 = fichier.texte_divise.get(1);
+        String nom_fichier = "big.txt";
+        Fichier2 fichier = new Fichier2(nom_fichier);
+        List<String> partie1 = fichier.texte_divise.get(0);
+        List<String> partie2 = fichier.texte_divise.get(1);
 
         //Map n = new Map(partie);
         
@@ -42,7 +43,7 @@ public class Main {
         //Reduce r = new Reduce(s.motreunis);
         TimeUnit.SECONDS.sleep(1);
         HashMap<String, Integer> resReduce = compilationResReduce(redth1.get_dicof(), redth2.get_dicof());
-        System.out.println(resReduce);
+        //System.out.println(resReduce);
 
         //r.afficher();
     }
