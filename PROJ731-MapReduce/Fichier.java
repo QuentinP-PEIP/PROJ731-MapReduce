@@ -19,10 +19,6 @@ public class Fichier {
         System.out.println("Le fichier contient " + this.number + " lignes");
         
         this.texte_divise = this.cut(adresse);
-
-        System.out.println("Partie 1: \n" + texte_divise.get(0) + "\n");
-        System.out.println("Partie 2: \n" + texte_divise.get(1) + "\n");
-
     }
 
     public int count_line(String adresse){ //Fonction qui permet de compter le nombre de ligne dans le document donné par l'adresse

@@ -1,20 +1,30 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Map {
-    String texte;
-    HashMap<String, Integer> mot;
+    private String texte;
+    public ArrayList<Couple> mot = new ArrayList<Couple>();
+
     public Map(String texte){
         this.texte = texte.toLowerCase();
-        splitbyword(this.texte);
+        //splitbyword(this.texte);
     }
 
     public void splitbyword(String texte){
-        String result = texte.replaceAll("\\p{Punct}&&[^']+", " "); 
-        String[] words = result.split(" ");
-        HashMap<String, Integer> mot = new HashMap<String, Integer>();
+        String result = texte.replaceAll("\\p{Punct}&&[^']+", " ");
+        String result1 = result.replaceAll(",", "");
+        String result2 = result1.replaceAll("\\.", "");
+        String[] words = result2.split(" ");
         for (String s : words){
-            mot.put(s, 1);
+            if(!s.equals("")){
+                Couple c = new Couple(s, 1);
+                this.mot.add(c);
+            }
         }
-        this.mot = mot;
+    }
+
+    public void afficher(){
+        for(Couple c:this.mot){
+            c.afficher();
+        }
     }
 }
