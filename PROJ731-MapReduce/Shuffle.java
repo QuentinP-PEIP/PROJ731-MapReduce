@@ -18,6 +18,7 @@ public class Shuffle {
             }
             else{//Si non:
                 ArrayList<Integer> valeur = new ArrayList<Integer>();//On récupère les données
+                valeur.add(1);//On la met à jour en ajoutant une apparition
                 this.motreunis.put(c.get_mot(), valeur);//On l'ajoute au dictionnaire
             }
         }

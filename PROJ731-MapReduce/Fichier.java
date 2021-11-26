@@ -15,7 +15,7 @@ public class Fichier {
         
         long debut = System.currentTimeMillis();// valeur de temps initiale pour comparer
         
-        String adresse = "PROJ731-MapReduce\\Textes\\" + fichier; // Adresse du fichier à étudier
+        String adresse = "Textes\\" + fichier; // Adresse du fichier à étudier
         
         this.texte = new String(Files.readAllBytes(Paths.get(adresse)),
                 StandardCharsets.UTF_8); // Lecture et copie du fichier dans l'attribut texte
