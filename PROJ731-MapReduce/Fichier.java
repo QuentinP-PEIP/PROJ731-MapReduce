@@ -1,69 +1,47 @@
-import java.io.*;
-import java.util.*;
-
-//import javax.sql.rowset.spi.SyncResolver;
-
-//import java.io.BufferedWriter;
-import java.io.File;
-//import java.io.FileWriter;
-//import java.io.IOException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Fichier {
-    int number;	//Texte dans le fichier
-    ArrayList<String> texte_divise;
-
-    public Fichier(String fichier) {
-        String adresse = "PROJ731-MapReduce\\Textes\\" + fichier;
-		this.number = this.count_line(adresse);
-
-        System.out.println("Le fichier contient " + this.number + " lignes");
-        
-        this.texte_divise = this.cut(adresse);
-    }
-
-    public int count_line(String adresse){ //Fonction qui permet de compter le nombre de ligne dans le document donné par l'adresse
-        int line_number = 0;
-        
-        try {
-                File myObj = new File(adresse);
-                Scanner myReader = new Scanner(myObj);
-                while (myReader.hasNextLine()) {
-                    line_number += 1;
-                    myReader.nextLine();
-                }
-                myReader.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        return line_number;
-    }
+    String texte;
+    ArrayList<List<String>> texte_divise;
     
-    public ArrayList<String> cut(String adresse){ //Fonction qui permet de couper le texte en Deux et le renvoie dans un tableau
-        ArrayList<String> tableau = new ArrayList<String>();
-        tableau.add(0, "");
-        tableau.add(1, "");
-        int line_number = 0;
-        int moitie = this.number/2;
 
-        try {
-            File myObj = new File(adresse);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                if(line_number < moitie){
-                    tableau.set(0, tableau.get(0) + " " + data); 
-                }
-                else{
-                    tableau.set(1, tableau.get(1) + " " + data);
-                }
-                line_number += 1;
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+    public Fichier(String fichier) throws IOException {
+        
+        long debut = System.currentTimeMillis();// valeur de temps initiale pour comparer
+        
+        String adresse = "Textes\\" + fichier; // Adresse du fichier à étudier
+        
+        this.texte = new String(Files.readAllBytes(Paths.get(adresse)),
+                StandardCharsets.UTF_8); // Lecture et copie du fichier dans l'attribut texte
+       
+        long tempsExe1 = System.currentTimeMillis()-debut; // calcul du temps pour la lecture et la copie
+        System.out.println("Temps de copie est de " + tempsExe1 + " ms");
+        
+        this.texte_divise = this.cut();
+        
+        long tempsExe2 = System.currentTimeMillis()-debut;
+        System.out.println("Temps d'exécution du cut est de " + tempsExe2 + " ms");
+    }
+
+    public ArrayList<List<String>> cut(){ // Progtamme coupant le texte en deux et le renvoyant
+        // Dans une liste de liste de String
+        ArrayList<List<String>> tableau = new ArrayList<List<String>>();
+        
+        String mot[] = this.texte.split("\\P{L}+"); //Suppression de tous les signes d'accentuation et ponctuation
+        List<String> list = Arrays.asList(mot); //Convertion en liste de String
+        int moitie = list.size()/2;
+        List<String> part1 = list.subList(0, moitie);//Separation de la liste en deux -> Part1
+        List<String> part2 = list.subList(moitie, list.size()); // ->Part2
+        //System.out.println(part2);
+        
+        tableau.add(part1);
+        tableau.add(part2);
         return tableau;
     }
 }

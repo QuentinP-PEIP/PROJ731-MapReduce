@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Shuffle {
-    public HashMap<String, ArrayList<Integer>> motreunis = new HashMap<String, ArrayList<Integer>>();
+    public HashMap<String, ArrayList<Integer>> motreunis = new HashMap<String, ArrayList<Integer>>();//Dictionnaire conteant les données des couples
     
     public Shuffle (ArrayList<Couple> mot){
         reunion(mot);
@@ -10,26 +10,24 @@ public class Shuffle {
 
     public void reunion(ArrayList<Couple> mot){
 
-        for (Couple c : mot){
-            if (appartiens(c.get_mot())){
-                ArrayList<Integer> oldvalue = this.motreunis.get(c.get_mot());
-                ArrayList<Integer> newvalue = oldvalue;
-                newvalue.add(1);
-                this.motreunis.put(c.get_mot(), newvalue);
+        for (Couple c : mot){//Pour tous les couples dans la liste de Couple
+            if (appartiens(c.get_mot())){ // On vérifie si le mot est déjà présent dans le dictionnaire, si oui:
+                ArrayList<Integer> value = this.motreunis.get(c.get_mot());//on collete la donnée déjà présente dans le dictionnaire
+                value.add(1);//On la met à jour en ajoutant une apparition
+                this.motreunis.put(c.get_mot(), value);//On met à jour le dictionnaire
             }
-            else{
-                ArrayList<Integer> valeur = new ArrayList<Integer>();
-                valeur.add(1);
-                this.motreunis.put(c.get_mot(), valeur);
+            else{//Si non:
+                ArrayList<Integer> valeur = new ArrayList<Integer>();//On récupère les données
+                this.motreunis.put(c.get_mot(), valeur);//On l'ajoute au dictionnaire
             }
         }
     }
 
-    public boolean appartiens(String mot){
+    public boolean appartiens(String mot){//Fonction renvoyant True si le mot en argument est déjà présent dans le dictionnaire
         return this.motreunis.containsKey(mot);
     }
 
-    public void affiche(){
+    public void affiche(){//Fonction affichant le dictionnaire
         System.out.println(this.motreunis);
     }
 }

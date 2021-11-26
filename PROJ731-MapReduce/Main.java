@@ -3,11 +3,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String args[]) throws InterruptedException, IOException {
 
         long debut = System.currentTimeMillis(); //On initialise l'heure à laquelle commence le programme
+
 
         String nom_fichier = "big.txt"; //On choisi le fichier à analyser
         Fichier2 fichier = new Fichier2(nom_fichier); //On crée un object fichier2 utilisé pour faire des actions sur le fichier
@@ -20,9 +22,11 @@ public class Main {
         mapth1.join(); //On attend que le thread map1 se finisse
         mapth2.join(); //et que le map2 aussi
 
+
         ArrayList<Couple> resMap = Compilateur.compilationResMap(mapth1.getThmot(), mapth2.getThmot()); //On rassemble les deux résultats des threads en une seule liste
 
         Shuffle s = new Shuffle(resMap); //On crée un objet shuffle qui permet la réunion en une hashmap des différents mots et leur fréquence
+
 
         ArrayList<HashMap<String, ArrayList<Integer>>> dicoF = Compilateur.compilationResShuffle(s.motreunis); //On divise la hashmap en deux
 

@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 public class Compilateur {
     
     public Compilateur(){}
-
     //Cette classe est utilisée pour regrouper les méthodes agissant sur les résultats des différentes parties du programme
 
     public static ArrayList<Couple> compilationResMap(ArrayList<Couple> resMap1, ArrayList<Couple> resMap2){ //Permet de concaténer deux listes de couples
@@ -50,7 +49,6 @@ public class Compilateur {
           Integer valeur = entry.getValue();
           dicoF.put(cle, valeur);
         }
-   
         return dicoF; //On retourne la hashmap finale
       }
 }
