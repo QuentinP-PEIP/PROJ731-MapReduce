@@ -7,7 +7,6 @@ public class Map {
 
     public Map(List<String> texte){
         this.texte = texte;
-        //splitbyword(this.texte);
     }
 
     public void splitbyword(){

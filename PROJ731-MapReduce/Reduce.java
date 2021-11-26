@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Reduce {
+    
+    HashMap<String, ArrayList<Integer>> dico = new HashMap<String, ArrayList<Integer>>();
     HashMap<String, Integer> dicof = new HashMap<String, Integer>();
     
     public Reduce(HashMap<String, ArrayList<Integer>> dico){
-        //compter(dico);
+        this.dico = dico;
     }
 
     public void compter(HashMap<String, ArrayList<Integer>> dico){
