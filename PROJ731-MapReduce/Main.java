@@ -3,17 +3,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.Map;
-import java.util.Map.Entry;
-
 
 public class Main {
     public static void main(String args[]) throws InterruptedException, IOException {
 
-        long debut = System.currentTimeMillis();  
+        long debut = System.currentTimeMillis(); // Première valeur du temps pour comparer
 
-        String nom_fichier = "big.txt";
-        Fichier2 fichier = new Fichier2(nom_fichier);
+        String nom_fichier = "big.txt"; //Nom du fichier à étudier
+        
+        Fichier fichier = new Fichier(nom_fichier);
         List<String> partie1 = fichier.texte_divise.get(0);
         List<String> partie2 = fichier.texte_divise.get(1);  
 
@@ -25,63 +23,20 @@ public class Main {
         System.out.println("Temps d'exécution du map est de " + tempsExe + " ms");
         TimeUnit.SECONDS.sleep(1);
 
-        ArrayList<Couple> resMap = compilationResMap(mapth1.getThmot(), mapth2.getThmot());
+        //Compilateur comp = new Compilateur();
+
+        ArrayList<Couple> resMap = Compilateur.compilationResMap(mapth1.getThmot(), mapth2.getThmot());
 
         Shuffle s = new Shuffle(resMap);
 
-        ArrayList<HashMap<String, ArrayList<Integer>>> dicoF = compilationResMap(s.motreunis);
+        ArrayList<HashMap<String, ArrayList<Integer>>> dicoF = Compilateur.compilationResShuffle(s.motreunis);
 
         ReduceThread redth1 = new ReduceThread("redt1", dicoF.get(0));
         ReduceThread redth2 = new ReduceThread("redt2", dicoF.get(1));
         TimeUnit.SECONDS.sleep(1);
 
-        HashMap<String, Integer> resReduce = compilationResReduce(redth1.get_dicof(), redth2.get_dicof());
+        HashMap<String, Integer> resReduce = Compilateur.compilationResReduce(redth1.get_dicof(), redth2.get_dicof());
 
         //r.afficher();
-    }
-
-    public static ArrayList<Couple> compilationResMap(ArrayList<Couple> resMap1, ArrayList<Couple> resMap2){
-      
-      ArrayList<Couple> resMap = new ArrayList<Couple>();
-      resMap.addAll(resMap1);
-      resMap.addAll(resMap2);
-      return resMap;
-    }
-
-    public static ArrayList<HashMap<String, ArrayList<Integer>>> compilationResMap(HashMap<String, ArrayList<Integer>> hashMap){
-      
-      HashMap<String, ArrayList<Integer>> dico1 = new HashMap<String, ArrayList<Integer>>();
-      HashMap<String, ArrayList<Integer>> dico2 = new HashMap<String, ArrayList<Integer>>();
-      ArrayList<HashMap<String, ArrayList<Integer>>> listDico = new ArrayList<HashMap<String, ArrayList<Integer>>>();
-
-      int cpt = 0;
-      for (Map.Entry<String, ArrayList<Integer>> entry : hashMap.entrySet()) {
-        String cle = entry.getKey();
-        ArrayList<Integer> valeur = entry.getValue();
-        if (cpt%2 == 0){
-          dico1.put(cle, valeur);
-        }
-        else{
-          dico2.put(cle, valeur);
-        }
-        cpt++;
-        } 
-    
-      listDico.add(dico1);
-      listDico.add(dico2);   
-      return listDico;
-    }
-
-    public static HashMap<String, Integer> compilationResReduce(HashMap<String, Integer> hashMap1, HashMap<String, Integer> hashMap2 ){
-      
-      HashMap<String, Integer> dicoF = hashMap1;
-
-      for (Entry<String, Integer> entry : hashMap2.entrySet()) {
-        String cle = entry.getKey();
-        Integer valeur = entry.getValue();
-        dicoF.put(cle, valeur);
-      }
- 
-      return dicoF;
     }
 }
