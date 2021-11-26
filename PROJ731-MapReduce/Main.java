@@ -23,7 +23,10 @@ public class Main {
 
         long tempsExe = System.currentTimeMillis()-debut;
         System.out.println("Temps d'exécution du map est de " + tempsExe + " ms");
-        TimeUnit.SECONDS.sleep(1);
+        //TimeUnit.SECONDS.sleep(1);
+
+        mapth1.join();
+        mapth2.join();
 
         ArrayList<Couple> resMap = compilationResMap(mapth1.getThmot(), mapth2.getThmot());
 
@@ -33,11 +36,13 @@ public class Main {
 
         ReduceThread redth1 = new ReduceThread("redt1", dicoF.get(0));
         ReduceThread redth2 = new ReduceThread("redt2", dicoF.get(1));
-        TimeUnit.SECONDS.sleep(1);
+        
+        redth1.join();
+        redth2.join();
 
         HashMap<String, Integer> resReduce = compilationResReduce(redth1.get_dicof(), redth2.get_dicof());
 
-        //r.afficher();
+        System.out.println(resReduce);
     }
 
     public static ArrayList<Couple> compilationResMap(ArrayList<Couple> resMap1, ArrayList<Couple> resMap2){
