@@ -3,7 +3,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String args[]) throws InterruptedException, IOException {
@@ -12,7 +11,7 @@ public class Main {
 
 
         String nom_fichier = "big.txt"; //On choisi le fichier à analyser
-        Fichier2 fichier = new Fichier2(nom_fichier); //On crée un object fichier2 utilisé pour faire des actions sur le fichier
+        Fichier fichier = new Fichier(nom_fichier); //On crée un object fichier2 utilisé pour faire des actions sur le fichier
         List<String> partie1 = fichier.texte_divise.get(0); //On crée une list de string correspondant à la première moitiée du fichier 
         List<String> partie2 = fichier.texte_divise.get(1); //On crée une list de string correspondant à la deuxième moitiée du fichier 
 
