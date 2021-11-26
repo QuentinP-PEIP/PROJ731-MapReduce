@@ -13,13 +13,14 @@ public class Fichier {
 
     public Fichier(String fichier) throws IOException {
         
-        long debut = System.currentTimeMillis();
+        long debut = System.currentTimeMillis();// valeur de temps initiale pour comparer
         
-        String adresse = "PROJ731-MapReduce\\Textes\\" + fichier;
+        String adresse = "Textes\\" + fichier; // Adresse du fichier à étudier
+        
         this.texte = new String(Files.readAllBytes(Paths.get(adresse)),
-                StandardCharsets.UTF_8);
+                StandardCharsets.UTF_8); // Lecture et copie du fichier dans l'attribut texte
        
-        long tempsExe1 = System.currentTimeMillis()-debut;
+        long tempsExe1 = System.currentTimeMillis()-debut; // calcul du temps pour la lecture et la copie
         System.out.println("Temps de copie est de " + tempsExe1 + " ms");
         
         this.texte_divise = this.cut();
@@ -28,14 +29,15 @@ public class Fichier {
         System.out.println("Temps d'exécution du cut est de " + tempsExe2 + " ms");
     }
 
-    public ArrayList<List<String>> cut(){
+    public ArrayList<List<String>> cut(){ // Progtamme coupant le texte en deux et le renvoyant
+        // Dans une liste de liste de String
         ArrayList<List<String>> tableau = new ArrayList<List<String>>();
         
-        String mot[] = this.texte.split("\\P{L}+");
-        List<String> list = Arrays.asList(mot);
+        String mot[] = this.texte.split("\\P{L}+"); //Suppression de tous les signes d'accentuation et ponctuation
+        List<String> list = Arrays.asList(mot); //Convertion en liste de String
         int moitie = list.size()/2;
-        List<String> part1 = list.subList(0, moitie);
-        List<String> part2 = list.subList(moitie, list.size());
+        List<String> part1 = list.subList(0, moitie);//Separation de la liste en deux -> Part1
+        List<String> part2 = list.subList(moitie, list.size()); // ->Part2
         //System.out.println(part2);
         
         tableau.add(part1);
