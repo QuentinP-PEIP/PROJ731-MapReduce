@@ -13,19 +13,19 @@ public class Fichier2 {
 
     public Fichier2(String fichier) throws IOException {
         
-        long debut = System.currentTimeMillis();
+        //long debut = System.currentTimeMillis();
         
         String adresse = "PROJ731-MapReduce\\Textes\\" + fichier;
         this.texte = new String(Files.readAllBytes(Paths.get(adresse)),
                 StandardCharsets.UTF_8);
        
-        long tempsExe1 = System.currentTimeMillis()-debut;
-        System.out.println("Temps de copie est de " + tempsExe1 + " ms");
+        //long tempsExe1 = System.currentTimeMillis()-debut;
+        //System.out.println("Temps de copie est de " + tempsExe1 + " ms");
         
         this.texte_divise = this.cut();
         
-        long tempsExe2 = System.currentTimeMillis()-debut;
-        System.out.println("Temps d'exécution du cut est de " + tempsExe2 + " ms");
+        //long tempsExe2 = System.currentTimeMillis()-debut;
+        //System.out.println("Temps d'exécution du cut est de " + tempsExe2 + " ms");
     }
 
     public ArrayList<List<String>> cut(){
